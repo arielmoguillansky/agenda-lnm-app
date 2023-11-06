@@ -1,0 +1,56 @@
+version: "3.8"
+services:
+  backend:
+    container_name: agenda-backend
+    build:
+      context: ./agenda-backend-app
+      dockerfile: Dockerfile
+    volumes:
+      - ./agenda-backend-app:/app
+    ports:
+      - 8000:8000
+
+  frontend:
+    container_name: agenda-frontend
+    build:
+      context: ./agenda-frontend-app
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+
+  db:
+    platform: linux/x86_64
+    image: mysql:8.0
+    container_name: agenda-mysql
+    environment:
+      MYSQL_DATABASE: "agenda"
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: "admin123"
+    volumes:
+      - db:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: agenda-phpmyadmin
+    links:
+      - db
+    environment:
+      MYSQL_USERNAME: "root"
+      MYSQL_ROOT_PASSWORD: "admin123"
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    restart: always
+    ports:
+      - 8081:80
+
+networks:
+  laravel-exa:
+    driver: bridge
+
+volumes:
+  db:
+    driver: local
