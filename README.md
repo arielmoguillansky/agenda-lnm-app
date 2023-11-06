@@ -1,5 +1,7 @@
 # Agenda app
 
+This is a simple Laravel + NuxtJs app that manages contacts.
+
 ### Stack
 
 - Laravel
