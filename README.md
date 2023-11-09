@@ -1,6 +1,7 @@
 # Agenda app
 
-This is a simple Laravel + NuxtJs app that manages contacts.
+This is a simple Laravel/Sail + NuxtJs app that manages contacts.
+Laravel Sail is a light-weight command-line interface for interacting with Laravel's default Docker development environment
 
 ### Stack
 
