@@ -1,1 +1,0 @@
-export { default } from "file:///home/ariel/Documents/buildOne/agenda-frontend-app/node_modules/@nuxt/vite-builder/dist/runtime/vite-node.mjs"
