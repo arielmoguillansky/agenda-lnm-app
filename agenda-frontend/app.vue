@@ -1,3 +1,8 @@
 <template>
-  <NuxtPage />
+    <VitePwaManifest />
+    <NuxtPage />
 </template>
+
+<script setup>
+
+</script>
