@@ -1,3 +1,5 @@
 <template>
-  <NuxtPage />
+  <div>
+INDEX
+</div>
 </template>
