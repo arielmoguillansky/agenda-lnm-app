@@ -1,6 +1,6 @@
 <template>
-  <AdminLayout>
-    <div id="AdminPage" class="flex h-[100vh] pb-4">
+  <div>
+    <div id="AdminPage" class="flex pb-4">
       <div class="max-w-[750px] mx-auto pb-24">
         <div class="bg-white">
           <div
@@ -14,51 +14,76 @@
             >
               <div
                 class="relative group"
-                v-for="(user, index) in users.data"
+                v-for="(user, index) in data"
                 :key="index"
               >
-                <div
-                  class="w-full overflow-hidden bg-gray-200 rounded-md aspect-h-1 aspect-w-1 lg:aspect-none lg:h-80"
-                >
-                  <img
-                    src="https://images.pexels.com/photos/51383/photo-camera-subject-photographer-51383.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                    alt="image"
-                    class="object-cover object-center w-full h-full lg:h-full lg:w-full"
-                  />
-                </div>
-                <button
+                {{ user.name }}
+                <!-- <button
                   class="px-2 py-1 text-white rounded-md bg-gradient-to-r from-cyan-500 to-blue-500"
-                  @click.prevent="addUser(user.id)"
+                  @click.prevent="addUser(data.id)"
                 >
                   Add contact
-                </button>
+                </button> -->
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </AdminLayout>
+    <button
+      class="flex items-center px-4 py-2 mt-5 text-gray-600 rounded-md hover:bg-gray-200"
+      @click="logout()"
+    >
+      <span class="mx-4 font-medium"> Sign out </span>
+    </button>
+  </div>
 </template>
 
 <script setup>
-import AdminLayout from "~~/layouts/AdminLayout.vue";
-import { useUserStore } from "~~/stores/user";
-import { storeToRefs } from "pinia";
-const userStore = useUserStore();
-const { users } = storeToRefs(userStore);
-
-const addUser = async (productID) => {
-  try {
-    await userStore.addUser(userId);
-  } catch (error) {}
-};
-
-onMounted(async () => {
-  try {
-    await userStore.getUser();
-  } catch (error) {
-    console.log(error);
-  }
+definePageMeta({
+  middleware: "auth",
 });
+const router = useRouter();
+const config = useRuntimeConfig();
+let token;
+if (process.client) {
+  token = localStorage.getItem("token");
+}
+const { data } = await useFetch(`${config.public.apiUrl}/users`, {
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+});
+const logout = () => {
+  localStorage.removeItem("token");
+  router.push("/login");
+};
+// import AdminLayout from "~~/layouts/AdminLayout.vue";
+// import { useUserStore } from "~~/stores/user";
+// import { storeToRefs } from "pinia";
+
+// const userStore = useUserStore();
+// const { user } = storeToRefs(userStore);
+// const router = useRouter();
+// const addUser = async (productID) => {
+//   try {
+//     await userStore.addUser(userId);
+//   } catch (error) {}
+// };
+// onMounted(async () => {
+//   try {
+//     await userStore.getUsers();
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
+// const logout = async () => {
+//   try {
+//     console.log("token", token);
+//     await userStore.logout();
+//     router.push("/");
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 </script>
