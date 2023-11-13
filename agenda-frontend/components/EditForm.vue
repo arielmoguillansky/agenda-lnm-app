@@ -1,11 +1,16 @@
 <template>
-  <div class="p-4">
-    <div class="flex gap-2 mb-4 text-gray-400">
+  <div
+    class="absolute top-0 left-0 w-full h-full p-4 py-10 overflow-hidden bg-white"
+  >
+    <button
+      @click.stop="emit('modal-close')"
+      class="flex gap-2 mb-6 text-gray-400"
+    >
       <span class="text-gray-400 cursor-pointer material-icons">
         arrow_back
       </span>
       <span>Back</span>
-    </div>
+    </button>
     <div>
       <div class="flex gap-3">
         <div class="rounded-full h-[50px] w-[50px] overflow-hidden">
@@ -51,13 +56,10 @@
 </template>
 <script setup>
 const props = defineProps({
-  contactId: Number,
   contactInfo: Object,
 });
-import { reactive } from "vue";
-
-const { setId } = useContactStore();
-
+import { defineProps, defineEmits, reactive } from "vue";
+const emit = defineEmits(["modal-close"]);
 const state = reactive({
   showForm: false,
 });
@@ -66,8 +68,6 @@ const editForm = () => {
   state.showForm = true;
 };
 const updateUser = () => {
-  setId(props.contactId);
-
   // state.showForm = false;
 };
 </script>

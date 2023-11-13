@@ -4,7 +4,6 @@ export const useContactStore = defineStore("contacts", {
   state: () => ({
     contacts: [],
     filteredContacts: [],
-    contactId: null,
     contactInfo: {},
   }),
   persistence: {
@@ -35,7 +34,6 @@ export const useContactStore = defineStore("contacts", {
         this.loading = pending;
         if (data.value) {
           this.contactInfo = data.value[0];
-          this.contactId = id;
         }
       } catch (e) {
         console.log(e);

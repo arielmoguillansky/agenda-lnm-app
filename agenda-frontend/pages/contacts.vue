@@ -39,9 +39,9 @@
       </li>
     </ul>
     <EditForm
-      v-if="contactId"
-      :contactId="contactId"
+      v-if="isModalOpened"
       :contactInfo="contactInfo"
+      @modal-close="closeModal"
     />
   </div>
 </template>
@@ -56,12 +56,18 @@ const route = useRoute();
 const router = useRouter();
 const config = useRuntimeConfig();
 const { getContacts, setId, getContactInfo } = useContactStore();
-const { contacts, contactId, contactInfo } = storeToRefs(useContactStore());
-
+const { contacts, contactInfo } = storeToRefs(useContactStore());
+const isModalOpened = ref(false);
 await getContacts();
+
+const closeModal = () => {
+  isModalOpened.value = false;
+  document.body.classList.remove("overflow-hidden");
+};
 
 const editUser = async (id) => {
   await getContactInfo(id); // call authenticateUser and pass the user object
-  console.log("INFOOO", contactInfo);
+  isModalOpened.value = true;
+  document.body.classList.add("overflow-hidden");
 };
 </script>
