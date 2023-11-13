@@ -1,34 +1,26 @@
 <template>
-  <div>
-    <div id="AdminPage" class="flex pb-4">
-      <div class="max-w-[750px] mx-auto pb-24">
-        <div class="bg-white">
-          <div
-            class="max-w-2xl px-4 py-16 mx-auto sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8"
-          >
-            <h2 class="text-2xl font-bold tracking-tight text-gray-900">
-              Contacts
-            </h2>
-            <div
-              class="grid grid-cols-1 mt-6 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8"
-            >
-              <div
-                class="relative group"
-                v-for="(user, index) in contacts"
-                :key="index"
-              >
-                {{ user.name }}
-                <!-- <button
-                  class="px-2 py-1 text-white rounded-md bg-gradient-to-r from-cyan-500 to-blue-500"
-                  @click.prevent="addUser(data.id)"
-                >
-                  Add contact
-                </button> -->
-              </div>
-            </div>
-          </div>
-        </div>
+  <div class="p-4">
+    <header class="w-full px-4 py-9 bg-gray">
+      <div>
+        <h1 class="text-4xl font-bold">{{ route.meta.name }}</h1>
       </div>
+    </header>
+    <h1 class="text-3xl">Welcome {{ user.name }}</h1>
+    <div class="m-auto mt-12">
+      <nuxt-link
+        to="/contacts"
+        class="block w-4/6 p-4 m-auto font-semibold text-center text-white uppercase rounded-full bg-purple hover:bg-purple"
+      >
+        Contacts list
+      </nuxt-link>
+    </div>
+    <div class="m-auto mt-12">
+      <button
+        @click="logout"
+        class="block w-4/6 p-4 m-auto font-semibold text-white uppercase rounded-full bg-purple hover:bg-purple"
+      >
+        Logout
+      </button>
     </div>
   </div>
 </template>
@@ -36,18 +28,19 @@
 <script setup>
 definePageMeta({
   middleware: "auth",
+  name: "Home",
 });
-const router = useRouter();
-const config = useRuntimeConfig();
-const { getContacts } = useContactStore();
-const { contacts } = storeToRefs(useContactStore());
+import { storeToRefs } from "pinia"; // import storeToRefs helper hook from pinia
+import { useAuthStore } from "~/stores/auth"; // import the auth store we just created
 
-onMounted(async () => {
-  try {
-    console.log("ACA");
-    await getContacts();
-  } catch (error) {
-    console.log(error);
-  }
-});
+const route = useRoute();
+const router = useRouter();
+
+const { logUserOut } = useAuthStore(); // use authenticateUser action from  auth store
+const { authenticated, user } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
+
+const logout = () => {
+  logUserOut();
+  router.push("/login");
+};
 </script>

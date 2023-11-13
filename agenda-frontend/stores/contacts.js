@@ -3,29 +3,66 @@ import { defineStore } from "pinia";
 export const useContactStore = defineStore("contacts", {
   state: () => ({
     contacts: [],
+    filteredContacts: [],
+    contactId: null,
+    contactInfo: {},
   }),
+  persistence: {
+    enable: true,
+    mode: "localSession",
+  },
+  getters: {},
   actions: {
-    async getContacts() {
-      console.log("22222222222");
+    setId(id) {
+      this.contactId = id;
+    },
+    async getContactInfo(id) {
+      try {
+        const token = useCookie("token");
+        const config = useRuntimeConfig();
+        const { data, pending } = await useFetch(
+          `${config.public.apiUrl}/users/${id}`,
+          {
+            method: "get",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: `Bearer ${token.value}`,
+            },
+          }
+        );
 
-      const token = useCookie("token");
-      const config = useRuntimeConfig();
-      const { data, pending } = await useFetch(
-        `${config.public.apiUrl}/users`,
-        {
-          method: "get",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            Authorization: `Bearer ${token.value}`,
-          },
+        this.loading = pending;
+        if (data.value) {
+          this.contactInfo = data.value[0];
+          this.contactId = id;
         }
-      );
-      this.loading = pending;
-      if (data.value) {
-        this.contacts = data.value;
-        // token.value = data?.value?.token; // set token to cookie
-        // this.authenticated = true; // set authenticated  state value to true
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    async getContacts() {
+      try {
+        const token = useCookie("token");
+        const config = useRuntimeConfig();
+        const { data, pending } = await useFetch(
+          `${config.public.apiUrl}/users`,
+          {
+            method: "get",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+              Authorization: `Bearer ${token.value}`,
+            },
+          }
+        );
+
+        this.loading = pending;
+        if (data.value) {
+          this.contacts = data.value;
+        }
+      } catch (e) {
+        console.log(e);
       }
     },
   },

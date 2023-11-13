@@ -44,10 +44,9 @@ const {
 
 <template>
   <div
-    class="TextInput"
+    class="textInput"
     :class="{ 'has-error': !!errorMessage, success: meta.valid }"
   >
-    <label :for="name">{{ label }}</label>
     <input
       :name="name"
       :id="name"
@@ -65,7 +64,7 @@ const {
 </template>
 
 <style scoped>
-.TextInput {
+.textInput {
   position: relative;
   margin-bottom: calc(1em * 1.5);
   width: 100%;
@@ -79,7 +78,6 @@ label {
 
 input {
   border-radius: 5px;
-  border: 2px solid transparent;
   padding: 15px 10px;
   outline: none;
   background-color: #f2f5f7;
@@ -100,29 +98,20 @@ input:focus {
   font-size: 14px;
 }
 
-.TextInput.has-error input {
-  background-color: var(--error-bg-color);
-  color: var(--error-color);
+.textInput.has-error input {
+  @apply bg-red-100;
 }
 
-.TextInput.has-error input:focus {
-  border-color: var(--error-color);
+.textInput.has-error input:focus {
+  @apply text-red-400;
 }
 
-.TextInput.has-error .help-message {
-  color: var(--error-color);
+.textInput.has-error .help-message {
+  @apply text-red-400 text-xs;
 }
 
-.TextInput.success input {
-  background-color: var(--success-bg-color);
-  color: var(--success-color);
-}
-
-.TextInput.success input:focus {
-  border-color: var(--success-color);
-}
-
-.TextInput.success .help-message {
-  color: var(--success-color);
+.textInput input,
+.textInput.success input {
+  @apply bg-pink;
 }
 </style>

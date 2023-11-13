@@ -99,7 +99,6 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import * as Yup from "yup";
 import { storeToRefs } from "pinia";
 import { useAuthStore } from "~/stores/auth";

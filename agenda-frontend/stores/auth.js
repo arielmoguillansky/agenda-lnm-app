@@ -5,11 +5,15 @@ export const useAuthStore = defineStore("auth", {
     authenticated: false,
     registered: false,
     loading: false,
+    error: "",
+    user: {},
   }),
+  persist: true,
+  getters: {},
   actions: {
     async authenticateUser({ email, password }) {
       const config = useRuntimeConfig();
-      const { data, pending } = await useFetch(
+      const { data, pending, error } = await useFetch(
         `${config.public.apiUrl}/login`,
         {
           method: "post",
@@ -24,10 +28,14 @@ export const useAuthStore = defineStore("auth", {
         }
       );
       this.loading = pending;
+      if (error.value) {
+        this.error = error.value.data.message;
+      }
       if (data.value) {
         const token = useCookie("token");
         token.value = data?.value?.token; // set token to cookie
         this.authenticated = true; // set authenticated  state value to true
+        this.user = data.value.user;
       }
     },
     async registerUser({
@@ -62,7 +70,6 @@ export const useAuthStore = defineStore("auth", {
         }
       );
       this.loading = pending;
-      console.log("DATA", data);
       if (data.value) {
         this.registered = true; // set registered  state value to true
       }
