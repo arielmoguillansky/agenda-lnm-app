@@ -24,7 +24,7 @@ Route::post('/login', [AuthController::class, 'login']);
 // Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
 	Route::get('/users', [UserController::class, 'index']);
-	Route::get('/users/{id}', [UserController::class, 'show']);
+	Route::get('/users/{user}', [UserController::class, 'show']);
 	Route::post('/users', [UserController::class, 'store']);
 	Route::post('/users/search', [UserController::class, 'search']);
 	Route::put('/users/{user}', [UserController::class, 'update']);

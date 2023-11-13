@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             'address' => '6th street 145',
             'phone' => '1150403020',
             'title' => 'Developer',
+            'status' => 'Contact status message',
             'email' => 'a@a.com',
             'password' => '123456',
         ]);
