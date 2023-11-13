@@ -57,6 +57,9 @@
 <script setup>
 import { ref } from "vue";
 import * as Yup from "yup";
+import { storeToRefs } from "pinia";
+import { useAuthStore } from "~/stores/auth";
+
 const router = useRouter();
 const config = useRuntimeConfig();
 const { handleSubmit, values } = useForm({
@@ -66,60 +69,20 @@ const { handleSubmit, values } = useForm({
   }),
 });
 
-const login = async (values) => {
-  const { data: responseData } = await useFetch(
-    `${config.public.apiUrl}/login`,
-    {
-      headers: {
-        cookie: "cookie",
-      },
-      method: "post",
-      body: {
-        email: values.email,
-        password: values.password,
-      },
-    }
-  );
-
-  if (responseData.value.token) {
-    localStorage.setItem("token", responseData.value.token);
-    router.push("/");
-  }
-};
-
 const onSubmit = handleSubmit((values, { resetForm }) => {
   login(values);
   resetForm();
 });
 
-// import axios from "axios";
-// import { useUserStore } from "~~/stores/user";
-// import AdminLayout from "~/layouts/AdminLayout.vue";
+const { authenticateUser } = useAuthStore(); // use authenticateUser action from  auth store
 
-// const userStore = useUserStore();
-// const router = useRouter();
+const { authenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
 
-// let email = ref(null);
-// let password = ref(null);
-// let errors = ref(null);
-
-// const refreshState = () => {
-//   userStore.resetState();
-// };
-
-// const login = async () => {
-//   errors.value = null;
-//   try {
-//     await userStore.login(email.value, password.value);
-//     const token = window.localStorage.getItem("token");
-//     console.log("11111");
-//     if (token) {
-//       axios.defaults.headers.common["Authorization"] =
-//         "Bearer " + userStore.token;
-//     }
-//     router.push("/");
-//   } catch (error) {
-//     errors.value = error.response.data.errors;
-//   }
-// };
+const login = async (values) => {
+  await authenticateUser(values); // call authenticateUser and pass the user object
+  // redirect to homepage if user is authenticated
+  if (authenticated) {
+    router.push("/");
+  }
+};
 </script>

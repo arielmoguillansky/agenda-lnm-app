@@ -17,7 +17,7 @@ use App\Http\Controllers\AuthController;
 
 // Public routes
 // Route::resource('users', UserController::class);
-Route::post('/register', [AuthController::class, 'register']);
+Route::post('/signup', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 

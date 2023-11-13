@@ -14,7 +14,7 @@
             >
               <div
                 class="relative group"
-                v-for="(user, index) in data"
+                v-for="(user, index) in contacts"
                 :key="index"
               >
                 {{ user.name }}
@@ -30,12 +30,6 @@
         </div>
       </div>
     </div>
-    <button
-      class="flex items-center px-4 py-2 mt-5 text-gray-600 rounded-md hover:bg-gray-200"
-      @click="logout()"
-    >
-      <span class="mx-4 font-medium"> Sign out </span>
-    </button>
   </div>
 </template>
 
@@ -45,45 +39,15 @@ definePageMeta({
 });
 const router = useRouter();
 const config = useRuntimeConfig();
-let token;
-if (process.client) {
-  token = localStorage.getItem("token");
-}
-const { data } = await useFetch(`${config.public.apiUrl}/users`, {
-  headers: {
-    Authorization: `Bearer ${token}`,
-  },
-});
-const logout = () => {
-  localStorage.removeItem("token");
-  router.push("/login");
-};
-// import AdminLayout from "~~/layouts/AdminLayout.vue";
-// import { useUserStore } from "~~/stores/user";
-// import { storeToRefs } from "pinia";
+const { getContacts } = useContactStore();
+const { contacts } = storeToRefs(useContactStore());
 
-// const userStore = useUserStore();
-// const { user } = storeToRefs(userStore);
-// const router = useRouter();
-// const addUser = async (productID) => {
-//   try {
-//     await userStore.addUser(userId);
-//   } catch (error) {}
-// };
-// onMounted(async () => {
-//   try {
-//     await userStore.getUsers();
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
-// const logout = async () => {
-//   try {
-//     console.log("token", token);
-//     await userStore.logout();
-//     router.push("/");
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+onMounted(async () => {
+  try {
+    console.log("ACA");
+    await getContacts();
+  } catch (error) {
+    console.log(error);
+  }
+});
 </script>
