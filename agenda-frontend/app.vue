@@ -1,5 +1,6 @@
 <template>
-  <NuxtLayout>
+  <div>
     <NuxtPage />
-  </NuxtLayout>
+    <ModalWindow />
+  </div>
 </template>

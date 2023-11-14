@@ -6,6 +6,9 @@ export default defineNuxtConfig({
       link: [
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
       ],
+      script: [
+        { tagPosition: 'bodyClose', src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCFVvqppkSdFepGl8DyBqPDIr7U5eAKNlo&libraries=places', async: true }
+      ],
     }
   },
   modules: [

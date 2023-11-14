@@ -1,8 +1,15 @@
-<script setup lang="ts">
+<script setup>
 import { toRef } from "vue";
 import { useField } from "vee-validate";
+import * as Yup from "yup";
+
+const { contactInfo } = storeToRefs(useContactStore());
 
 const props = defineProps({
+  hasPlaces: {
+    type: Boolean,
+    default: false,
+  },
   type: {
     type: String,
     default: "text",
@@ -40,6 +47,28 @@ const {
 } = useField(name, undefined, {
   initialValue: props.value,
 });
+const { resetField } = useField("address", Yup.string());
+import { onMounted, ref, defineProps } from "vue";
+
+const placesRef = ref(null);
+const placesAutocomplete = ref(null);
+
+const initPlacesAutocomplete = () => {
+  placesAutocomplete.value = new google.maps.places.Autocomplete(
+    placesRef.value,
+    {
+      types: ["geocode"],
+    }
+  );
+  placesAutocomplete.value.addListener("place_changed", () => {
+    const place = placesAutocomplete.value.getPlace();
+    contactInfo.address = place.formatted_address;
+    resetField({
+      value: place.formatted_address,
+    });
+  });
+};
+onMounted(initPlacesAutocomplete);
 </script>
 
 <template>
@@ -47,7 +76,9 @@ const {
     class="textInput"
     :class="{ 'has-error': !!errorMessage, success: meta.valid }"
   >
+    <label class="mb-2 text-xl font-bold" :for="name">{{ label }}</label>
     <input
+      :ref="hasPlaces ? 'placesRef' : ''"
       :name="name"
       :id="name"
       :type="type"
@@ -113,5 +144,9 @@ input:focus {
 .textInput input,
 .textInput.success input {
   @apply bg-pink;
+}
+</style>
+<style >
+.pac-container {
 }
 </style>

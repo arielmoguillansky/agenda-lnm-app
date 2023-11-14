@@ -3,20 +3,10 @@
     <h1 class="text-3xl font-extrabold text-center lg:text-5xl">Welcome</h1>
     <form class="mt-10" @submit="onSubmit">
       <div>
-        <TextInput
-          name="email"
-          type="email"
-          label="E-mail"
-          placeholder="john@doe.com"
-        />
+        <TextInput name="email" type="email" placeholder="john@doe.com" />
       </div>
       <div class="mt-4">
-        <TextInput
-          name="password"
-          type="password"
-          label="Password"
-          placeholder="******"
-        />
+        <TextInput name="password" type="password" placeholder="******" />
       </div>
       <div class="h-1 text-red-400">
         {{ error }}
