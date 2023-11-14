@@ -84,7 +84,7 @@
         </div>
         <div class="m-auto mt-12">
           <button
-            class="block w-4/6 p-4 m-auto font-semibold text-white uppercase rounded-full bg-purple hover:bg-purple"
+            class="block w-4/6 p-4 m-auto font-semibold text-white uppercase rounded-full bg-purple hover:bg-purple shadow-cta"
           >
             Save
           </button>
@@ -107,7 +107,7 @@
       <div class="m-auto mt-12">
         <button
           @click="editForm"
-          class="block w-4/6 p-4 m-auto font-semibold text-white uppercase rounded-full bg-purple hover:bg-purple"
+          class="block w-4/6 p-4 m-auto font-semibold text-white uppercase rounded-full bg-purple hover:bg-purple shadow-cta"
         >
           Edit
         </button>

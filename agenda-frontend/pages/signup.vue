@@ -77,7 +77,7 @@
                   :disabled="!values.email || !values.password"
                   :class="
                     values.email && values.password
-                      ? 'bg-[#8228D9] hover:bg-[#6c21b3] text-white'
+                      ? 'bg-[#8228D9] hover:bg-[#6c21b3] text-white shadow-cta'
                       : 'bg-[#EFF0EB] text-[#A7AAA2]'
                   "
                 >

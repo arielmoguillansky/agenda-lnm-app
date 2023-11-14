@@ -3,7 +3,9 @@
     <header class="w-full px-4 py-9 bg-gray">
       <div>
         <h1 class="text-4xl font-bold">{{ route.meta.name }}</h1>
-        <div class="flex items-center w-full px-4 mt-6 bg-white rounded-lg">
+        <div
+          class="flex items-center w-full px-4 mt-6 bg-white rounded-lg shadow-md"
+        >
           <input
             class="flex-1 py-4 focus:outline-none"
             v-if="route.meta.name === 'Contacts'"
@@ -15,6 +17,12 @@
         </div>
       </div>
     </header>
+    <span
+      v-if="filteredContacts.length === 0"
+      class="block m-auto mt-10 text-center text-gray-500"
+    >
+      No contacts found.
+    </span>
     <ul>
       <li
         v-for="(user, index) in filteredContacts"
@@ -45,7 +53,7 @@
     <div class="m-auto mt-12">
       <button
         @click="openCreationForm"
-        class="block w-4/6 p-4 m-auto font-semibold text-white uppercase rounded-full bg-purple hover:bg-purple"
+        class="block w-4/6 p-4 m-auto font-semibold text-white uppercase rounded-full bg-purple hover:bg-purple shadow-cta"
       >
         Add new contact
       </button>
@@ -56,6 +64,7 @@
 <script setup>
 import { useModalStore } from "~/stores/modal";
 import EditForm from "~/components/EditForm.vue";
+import CreateForm from "~/components/CreateForm.vue";
 
 const store = useModalStore();
 const search = ref("");

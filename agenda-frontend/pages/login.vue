@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col justify-center h-screen m-auto md:max-w-md">
+  <div class="flex flex-col justify-center h-screen p-4 m-auto md:max-w-md">
     <h1 class="text-3xl font-extrabold text-center lg:text-5xl">Welcome</h1>
     <form class="mt-10" @submit="onSubmit">
       <div>
@@ -18,7 +18,7 @@
           :disabled="!values.email || !values.password"
           :class="
             values.email && values.password
-              ? 'bg-purple hover:bg-purple text-white'
+              ? 'bg-purple hover:bg-purple text-white shadow-cta'
               : 'bg-[#EFF0EB] text-[#A7AAA2]'
           "
         >
