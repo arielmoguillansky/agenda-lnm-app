@@ -64,14 +64,20 @@
             <label class="h-full mb-2 text-xl font-bold" for="avatar">
               Avatar
               <div
-                class="relative flex w-full cursor-pointer bg-pink h-[54px]"
+                class="relative flex w-full cursor-pointer bg-pink h-[54px] px-4 mt-2"
                 @click="openFileSelector"
               >
-                <span class="font-normal text-md" v-if="selectedFileName">
+                <span
+                  class="overflow-hidden text-sm font-normal lg:text-md text-ellipsis"
+                  v-if="selectedFileName"
+                >
                   {{ selectedFileName }}
                 </span>
-                <span class="font-normal text-md" v-else>
-                  {{ contactInfo.avatar }}
+                <span
+                  class="w-3/4 overflow-hidden text-sm font-normal lg:text-md text-ellipsis h-max translate-y-[80%]"
+                  v-else
+                >
+                  {{ contactInfo.avatar.replace("avatars/", "") }}
                 </span>
                 <span
                   class="absolute right-4 translate-y-[65%] flex items-center text-gray-400 cursor-pointer material-icons"

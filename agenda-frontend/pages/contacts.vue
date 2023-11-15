@@ -7,7 +7,7 @@
           class="flex items-center w-full px-4 mt-6 bg-white rounded-lg shadow-md"
         >
           <input
-            class="flex-1 py-4 focus:outline-none"
+            class="flex-1 py-4 bg-white focus:outline-none"
             v-if="route.meta.name === 'Contacts'"
             type="text"
             v-model="search"

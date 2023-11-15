@@ -158,5 +158,6 @@ const handleCreateContact = async (values) => {
   }
 
   await createContact(formData);
+  closeModal();
 };
 </script>
