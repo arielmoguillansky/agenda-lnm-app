@@ -13,8 +13,8 @@ Laravel Sail is a light-weight command-line interface for interacting with Larav
 
 - Laravel v10
 - NuxtJS v3
-  -- Pinia
-  -- Vee validate
+   - Pinia
+   - Vee validate
 - Mysql v8
 - Phpmyadmin
 
@@ -33,6 +33,6 @@ Laravel Sail is a light-weight command-line interface for interacting with Larav
 
 ### On going improvements
 
-[] Use AWS S3 bucket to store images
-[] Create a dedicate `contacts` table and model to store contacts with user id reference.
-[] Improve UI
+- [ ]  Use AWS S3 bucket to store images
+- [ ] Create a dedicate `contacts` table and model to store contacts with user id reference.
+- [ ]  Improve UI
