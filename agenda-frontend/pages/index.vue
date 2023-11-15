@@ -9,7 +9,7 @@
     <div class="m-auto mt-12">
       <nuxt-link
         to="/contacts"
-        class="block w-4/6 p-4 m-auto font-semibold text-center text-white uppercase rounded-full bg-purple hover:bg-purple"
+        class="block w-4/6 p-4 m-auto font-semibold text-center text-white uppercase rounded-full bg-purple hover:bg-purple shadow-cta"
       >
         Contacts list
       </nuxt-link>
@@ -17,7 +17,7 @@
     <div class="m-auto mt-12">
       <button
         @click="logout"
-        class="block w-4/6 p-4 m-auto font-semibold text-white uppercase rounded-full bg-purple hover:bg-purple"
+        class="block w-4/6 p-4 m-auto font-semibold text-white uppercase rounded-full bg-purple hover:bg-purple shadow-cta"
       >
         Logout
       </button>

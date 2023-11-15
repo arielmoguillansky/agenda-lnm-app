@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\MultipartFormRequest;
+use App\Http\Resources\MultipartFormResource;
 
-class UserController extends Controller
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,9 +29,15 @@ class UserController extends Controller
             'phone'=> 'required',
             'title'=> 'required',
             'email'=> 'required|email|unique:users',
-            'password'=> 'required',
             'avatar' => 'image|mimes:jpeg,png,jpg',
         ]);
+        $input= $request->all();
+        
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $avatarPath = $avatar->store('avatars', 'public');
+            $input['avatar']=$avatarPath;
+        }
 
         return User::create($input);
     }
@@ -45,20 +53,19 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $contact)
     {
-
-        $input= $request->all();
-        
-        if ($request->hasFile('avatar')) {
-            $avatar = $request->file('avatar');
-            $avatarPath = $avatar->store('avatars', 'public');
-            $input['avatar']=$avatarPath;
-        }
-        
+        // $input= $request->all();
+        // print_r('AAAAAAAAAAAAa');
+        // print_r($input);
+        // if ($request->hasFile('avatar')) {
+        //     $avatar = $request->file('avatar');
+        //     $avatarPath = $avatar->store('avatars', 'public');
+        //     $input['avatar']=$avatarPath;
+        // }
         // $user object passed as a parameter, which already represents the user you want to update. You don't need to find the user again using 
-        $user->update($input);
-        return $user;
+        $contact->update($request->all());
+        return $contact;
     }
 
     /**

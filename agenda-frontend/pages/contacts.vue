@@ -34,7 +34,16 @@
           class="flex items-center w-full px-4 py-6 text-left"
         >
           <div class="rounded-full h-[50px] w-[50px] overflow-hidden">
-            <img src="../assets/images/profile.webp" alt="" />
+            <img
+              v-if="user.avatar"
+              :src="`${config.public.assetUrl}/${user.avatar}`"
+              alt="Contact avatar image"
+            />
+            <img
+              v-else
+              src="../assets/images/profile.webp"
+              alt="Contact avatar default image"
+            />
           </div>
           <div class="flex flex-col justify-center flex-1 gap-[3px] px-4">
             <h4 class="text-xl font-bold">
@@ -68,6 +77,8 @@ import CreateForm from "~/components/CreateForm.vue";
 
 const store = useModalStore();
 const search = ref("");
+
+const config = useRuntimeConfig();
 
 const openEditionForm = async (id) => {
   store.openModal({ component: EditForm });

@@ -19,7 +19,8 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     public: {
-      apiUrl: process.env.API_URL || 'http://localhost'
+      apiUrl: `${process.env.BASE_URL}${process.env.API_URL}` || 'http://localhost',
+      assetUrl: `${process.env.BASE_URL}${process.env.ASSET_URL}` || 'http://localhost'
     }
   },
   postcss: {

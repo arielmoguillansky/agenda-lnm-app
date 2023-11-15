@@ -15,27 +15,19 @@ export const useContactStore = defineStore("contacts", {
     setId(id) {
       this.contactId = id;
     },
-    async createContact({ email, name, lastname, phone, address, title }) {
+    async createContact(payload) {
       try {
         const token = useCookie("token");
         const config = useRuntimeConfig();
         const { data, pending } = await useFetch(
-          `${config.public.apiUrl}/users`,
+          `${config.public.apiUrl}/contacts`,
           {
             method: "post",
             headers: {
-              "Content-Type": "application/json",
               Accept: "application/json",
               Authorization: `Bearer ${token.value}`,
             },
-            body: {
-              email,
-              name,
-              lastname,
-              phone,
-              address,
-              title,
-            },
+            body: payload,
           }
         );
 
@@ -47,27 +39,51 @@ export const useContactStore = defineStore("contacts", {
         console.log(e);
       }
     },
-    async updateContact(id, { email, name, lastname, phone, address, title }) {
+    // async updateContact(id, { email, name, lastname, phone, address, title }) {
+    //   try {
+    //     const token = useCookie("token");
+    //     const config = useRuntimeConfig();
+    //     const { data, pending } = await useFetch(
+    //       `${config.public.apiUrl}/users/${id}`,
+    //       {
+    //         method: "put",
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //           Accept: "application/json",
+    //           Authorization: `Bearer ${token.value}`,
+    //         },
+    //         body: {
+    //           email,
+    //           name,
+    //           lastname,
+    //           phone,
+    //           address,
+    //           title,
+    //         },
+    //       }
+    //     );
+
+    //     this.loading = pending;
+    //     if (data.value) {
+    //       this.contactInfo = { ...data.value };
+    //     }
+    //   } catch (e) {
+    //     console.log(e);
+    //   }
+    // },
+    async updateContact(id, payload) {
       try {
         const token = useCookie("token");
         const config = useRuntimeConfig();
         const { data, pending } = await useFetch(
           `${config.public.apiUrl}/users/${id}`,
           {
-            method: "put",
+            method: "post",
             headers: {
-              "Content-Type": "application/json",
               Accept: "application/json",
               Authorization: `Bearer ${token.value}`,
             },
-            body: {
-              email,
-              name,
-              lastname,
-              phone,
-              address,
-              title,
-            },
+            body: payload,
           }
         );
 

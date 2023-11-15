@@ -5,36 +5,15 @@ import * as Yup from "yup";
 
 const { contactInfo } = storeToRefs(useContactStore());
 
-const props = defineProps({
-  hasPlaces: {
-    type: Boolean,
-    default: false,
-  },
-  type: {
-    type: String,
-    default: "text",
-  },
-  value: {
-    type: String,
-    default: undefined,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  label: {
-    type: String,
-    required: true,
-  },
-  successMessage: {
-    type: String,
-    default: "",
-  },
-  placeholder: {
-    type: String,
-    default: "",
-  },
-});
+const props = defineProps([
+  "hasPlaces",
+  "type",
+  "value",
+  "name",
+  "label",
+  "successMessage",
+  "placeholder",
+]);
 
 const name = toRef(props, "name");
 
@@ -78,7 +57,7 @@ onMounted(initPlacesAutocomplete);
   >
     <label class="mb-2 text-xl font-bold" :for="name">{{ label }}</label>
     <input
-      :ref="hasPlaces ? 'placesRef' : ''"
+      :ref="props.hasPlaces ? 'placesRef' : ''"
       :name="name"
       :id="name"
       :type="type"
@@ -94,7 +73,7 @@ onMounted(initPlacesAutocomplete);
   </div>
 </template>
 
-<style scoped>
+<style>
 .textInput {
   position: relative;
   margin-bottom: calc(1em * 1.5);
