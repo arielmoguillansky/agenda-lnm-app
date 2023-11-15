@@ -55,14 +55,6 @@ class ContactController extends Controller
      */
     public function update(Request $request, User $contact)
     {
-        // $input= $request->all();
-        // print_r('AAAAAAAAAAAAa');
-        // print_r($input);
-        // if ($request->hasFile('avatar')) {
-        //     $avatar = $request->file('avatar');
-        //     $avatarPath = $avatar->store('avatars', 'public');
-        //     $input['avatar']=$avatarPath;
-        // }
         // $user object passed as a parameter, which already represents the user you want to update. You don't need to find the user again using 
         $contact->update($request->all());
         return $contact;
