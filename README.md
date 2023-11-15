@@ -13,10 +13,11 @@ Laravel Sail is a light-weight command-line interface for interacting with Larav
 
 - Laravel v10
 - NuxtJS v3
-   - Pinia
-   - Vee validate
+  - Pinia
+  - Vee validate
 - Mysql v8
 - Phpmyadmin
+- Google Places integration
 
 ### Architecture
 
@@ -30,9 +31,10 @@ Laravel Sail is a light-weight command-line interface for interacting with Larav
 - Access backend folder and execute `./vendor/bin/sail up`
 - Access frontend folder and create a `.env` file based on `.env.example`. Fill the variables. By default, Laravel uses `/api` for api purposes and `/storage` for asset management and local storage.
 - Access frontend folder and execute `npm run dev`
+- To enable google's places API, paste you project's token in the env file
 
 ### On going improvements
 
-- [ ]  Use AWS S3 bucket to store images
+- [ ] Use AWS S3 bucket to store images
 - [ ] Create a dedicate `contacts` table and model to store contacts with user id reference.
-- [ ]  Improve UI
+- [ ] Improve UI
