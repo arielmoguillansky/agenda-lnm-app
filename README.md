@@ -38,3 +38,12 @@ Laravel Sail is a light-weight command-line interface for interacting with Larav
 - [ ] Use AWS S3 bucket to store images
 - [ ] Create a dedicate `contacts` table and model to store contacts with user id reference.
 - [ ] Improve UI
+
+
+### Screenshots
+
+|![Screenshot from 2023-11-15 18-25-46](https://github.com/arielmoguillansky/agenda-lnm-app/assets/50706052/df19c294-a979-4ee2-b32b-47a9afcb8b8a)|![Screenshot from 2023-11-15 18-29-32](https://github.com/arielmoguillansky/agenda-lnm-app/assets/50706052/af992386-1dcd-4417-99e6-7f1e129946fe)|![Screenshot from 2023-11-15 18-29-39](https://github.com/arielmoguillansky/agenda-lnm-app/assets/50706052/7578086f-a77c-4f34-a1f1-86df2d5f05e1)|![Screenshot from 2023-11-15 18-37-34](https://github.com/arielmoguillansky/agenda-lnm-app/assets/50706052/87d82ddf-9215-4f81-ac1a-e6862c92f17c)|![Screenshot from 2023-11-15 18-38-03](https://github.com/arielmoguillansky/agenda-lnm-app/assets/50706052/36190071-e76b-4ac1-8921-8565e05baa67)
+
+
+
+
