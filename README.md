@@ -13,8 +13,8 @@ Laravel Sail is a light-weight command-line interface for interacting with Larav
 
 - Laravel v10
 - NuxtJS v3
--- Pinia
--- Vee validate
+ - Pinia
+ - Vee validate
 - Mysql v8
 - Phpmyadmin
 
