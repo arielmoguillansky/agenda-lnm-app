@@ -68,7 +68,7 @@
                 @click="openFileSelector"
               >
                 <span
-                  class="overflow-hidden text-sm font-normal lg:text-md text-ellipsis"
+                  class="overflow-hidden text-sm font-normal lg:text-md text-ellipsis translate-y-[80%]"
                   v-if="selectedFileName"
                 >
                   {{ selectedFileName }}
@@ -77,7 +77,11 @@
                   class="w-3/4 overflow-hidden text-sm font-normal lg:text-md text-ellipsis h-max translate-y-[80%]"
                   v-else
                 >
-                  {{ contactInfo.avatar.replace("avatars/", "") }}
+                  {{
+                    (contactInfo.avatar &&
+                      contactInfo.avatar.replace("avatars/", "")) ||
+                    ""
+                  }}
                 </span>
                 <span
                   class="absolute right-4 translate-y-[65%] flex items-center text-gray-400 cursor-pointer material-icons"

@@ -43,7 +43,10 @@
               class="relative flex w-full cursor-pointer bg-pink h-[54px]"
               @click="openFileSelector"
             >
-              <span class="font-normal text-md" v-if="selectedFileName">
+              <span
+                class="overflow-hidden text-sm font-normal lg:text-md text-ellipsis translate-y-[80%]"
+                v-if="selectedFileName"
+              >
                 {{ selectedFileName }}
               </span>
               <span
