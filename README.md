@@ -18,6 +18,7 @@ Laravel Sail is a light-weight command-line interface for interacting with Larav
 - Mysql v8
 - Phpmyadmin
 - Google Places integration
+- AWS S3 storage
 
 ### Architecture
 
