@@ -30,7 +30,7 @@ Laravel Sail is a light-weight command-line interface for interacting with Larav
 - Download both agenda-app folders
 - Make sure no containers are running on ports 3306, 6379, 80, 8080.
 - Access backend folder and execute `./vendor/bin/sail up`
-- Access frontend folder and create a `.env` file based on `.env.example`. Fill the variables. By default, Laravel uses `/api` for api purposes and `/storage` for asset management and local storage.
+- Access frontend folder and create a `.env` file based on `.env.example`. Fill the variables. By default, Laravel uses `/api` for api requests.
 - Access frontend folder and execute `npm run dev`
 - To enable google's places API, paste you project's token in the env file
 
