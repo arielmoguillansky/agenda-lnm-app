@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\MultipartFormRequest;
 use App\Http\Resources\MultipartFormResource;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
 
 class ContactController extends Controller
 {
@@ -35,8 +37,16 @@ class ContactController extends Controller
         
         if ($request->hasFile('avatar')) {
             $avatar = $request->file('avatar');
-            $avatarPath = $avatar->store('avatars', 'public');
-            $input['avatar']=$avatarPath;
+            
+            // for disk storage - deprecated
+            // $avatarPath = $avatar->store('avatars', 'public');
+
+            // cloud storage
+            $avatarName = $avatar->hashName();
+            $avatarPath = $avatar->storeAs('avatars', $avatarName, 's3');
+            
+            $input['avatar']=$avatarName;
+            Storage::disk('s3')->put($avatarPath, file_get_contents($avatar));
         }
 
         return User::create($input);

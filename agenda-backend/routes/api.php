@@ -23,12 +23,12 @@ Route::post('/signup', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 
+Route::post('/contacts', [ContactController::class, 'store']);
 // Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
 	Route::get('/users', [UserController::class, 'index']);
 	Route::get('/users/{user}', [UserController::class, 'show']);
 	Route::post('/users', [UserController::class, 'store']);
-	Route::post('/contacts', [ContactController::class, 'store']);
 	Route::post('/users/search', [UserController::class, 'search']);
 	Route::put('/users/{user}', [UserController::class, 'update']);
 	Route::delete('/users/{user}', [UserController::class, 'destroy']);

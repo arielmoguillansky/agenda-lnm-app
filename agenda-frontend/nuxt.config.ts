@@ -20,7 +20,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiUrl: `${process.env.BASE_URL}${process.env.API_URL}` || 'http://localhost',
-      assetUrl: `${process.env.BASE_URL}${process.env.ASSET_URL}` || 'http://localhost'
+      assetUrl: `${process.env.S3_URL}${process.env.S3_BUCKET}` || 'http://localhost'
     }
   },
   postcss: {
