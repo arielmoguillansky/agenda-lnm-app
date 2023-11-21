@@ -98,17 +98,18 @@ const route = useRoute();
 
 const { getContacts, getContactInfo } = useContactStore();
 const { contacts } = storeToRefs(useContactStore());
+const { user } = storeToRefs(useAuthStore());
 
-await getContacts();
+await getContacts(user.value.id);
 
 const filteredContacts = computed(() => {
   const searchTerm = search.value.toLowerCase().trim();
 
   if (!searchTerm) {
-    return contacts.value;
+    return contacts.value.contacts;
   }
 
-  return contacts.value.filter((contact) => {
+  return contacts.value.contacts.filter((contact) => {
     const fullName = `${contact.name} ${contact.lastname}`.toLowerCase();
     return fullName.includes(searchTerm);
   });

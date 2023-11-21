@@ -47,7 +47,14 @@ const initPlacesAutocomplete = () => {
     });
   });
 };
-onMounted(initPlacesAutocomplete);
+onMounted(() => {
+  // Wait for Google Maps API to load
+  if (window.google) {
+    initPlacesAutocomplete();
+  } else {
+    console.error("Google Maps API not loaded.");
+  }
+});
 </script>
 
 <template>

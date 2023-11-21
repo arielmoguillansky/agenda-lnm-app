@@ -7,7 +7,7 @@ export default defineNuxtConfig({
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
       ],
       script: [
-        { tagPosition: 'bodyClose', src: `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_TOKEN}&libraries=places`, async: true }
+        { tagPosition: 'bodyClose', src: `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_TOKEN}&libraries=places`, async: true,  defer: true }
       ],
     }
   },

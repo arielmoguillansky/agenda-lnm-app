@@ -90,9 +90,6 @@
           placeholder="john@doe.com"
         />
       </div>
-      <div>
-        <TextInput name="password" type="password" label="Password" />
-      </div>
       <div class="h-1 text-red-400">
         {{ error }}
       </div>
@@ -110,13 +107,15 @@
 import { ref } from "vue";
 import { useModalStore } from "~/stores/modal";
 import { useContactStore } from "~/stores/contacts";
+import { useAuthStore } from "~/stores/auth";
 import * as Yup from "yup";
+
+const { user } = storeToRefs(useAuthStore());
 
 const { createContact } = useContactStore();
 const { closeModal } = useModalStore();
 const selectedFileName = ref("");
 const fileInputRef = ref(null);
-
 let formData = new FormData();
 
 const { handleSubmit, values } = useForm({
@@ -127,7 +126,6 @@ const { handleSubmit, values } = useForm({
     address: Yup.string().required(),
     phone: Yup.string().required(),
     email: Yup.string().email().required(),
-    password: Yup.string().min(6).required(),
   }),
 });
 
@@ -147,13 +145,13 @@ const handleChange = (e) => {
 
 const handleCreateContact = async (values) => {
   const formdata = {
+    user_id: user.value.id,
     email: values.email,
     name: values.name,
     lastname: values.lastname,
     phone: values.phone,
     address: values.address,
     title: values.title,
-    password: values.password,
   };
 
   for (const item in formdata) {

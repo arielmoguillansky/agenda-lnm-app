@@ -23,9 +23,12 @@ Route::post('/signup', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 
-Route::post('/contacts', [ContactController::class, 'store']);
 // Protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
+	Route::post('/contact', [ContactController::class, 'store']);
+	Route::get('/contact/{contact}', [ContactController::class, 'show']);
+	Route::put('/contact/{contact}', [ContactController::class, 'update']);
+	Route::post('/contacts', [ContactController::class, 'index']);
 	Route::get('/users', [UserController::class, 'index']);
 	Route::get('/users/{user}', [UserController::class, 'show']);
 	Route::post('/users', [UserController::class, 'store']);

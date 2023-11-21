@@ -26,6 +26,7 @@ class Contact extends Authenticatable
         'avatar',
         'status',
         'email',
+        'user_id',
     ];
 
     /**

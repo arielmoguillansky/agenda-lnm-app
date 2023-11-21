@@ -37,7 +37,7 @@ const route = useRoute();
 const router = useRouter();
 
 const { logUserOut } = useAuthStore(); // use authenticateUser action from  auth store
-const { authenticated, user } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
+const { user } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
 
 const logout = () => {
   logUserOut();

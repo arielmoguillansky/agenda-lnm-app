@@ -20,7 +20,7 @@ export const useContactStore = defineStore("contacts", {
         const token = useCookie("token");
         const config = useRuntimeConfig();
         const { data, pending } = await useFetch(
-          `${config.public.apiUrl}/contacts`,
+          `${config.public.apiUrl}/contact`,
           {
             method: "post",
             headers: {
@@ -44,7 +44,7 @@ export const useContactStore = defineStore("contacts", {
         const token = useCookie("token");
         const config = useRuntimeConfig();
         const { data, pending } = await useFetch(
-          `${config.public.apiUrl}/users/${id}`,
+          `${config.public.apiUrl}/contact/${id}`,
           {
             method: "post",
             headers: {
@@ -68,7 +68,7 @@ export const useContactStore = defineStore("contacts", {
         const token = useCookie("token");
         const config = useRuntimeConfig();
         const { data, pending } = await useFetch(
-          `${config.public.apiUrl}/users/${id}`,
+          `${config.public.apiUrl}/contact/${id}`,
           {
             method: "get",
             headers: {
@@ -87,18 +87,21 @@ export const useContactStore = defineStore("contacts", {
         console.log(e);
       }
     },
-    async getContacts() {
+    async getContacts(user_id) {
       try {
         const token = useCookie("token");
         const config = useRuntimeConfig();
         const { data, pending } = await useFetch(
-          `${config.public.apiUrl}/users`,
+          `${config.public.apiUrl}/contacts`,
           {
-            method: "get",
+            method: "post",
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
               Authorization: `Bearer ${token.value}`,
+            },
+            body: {
+              user_id,
             },
           }
         );
